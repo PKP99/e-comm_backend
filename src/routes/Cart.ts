@@ -16,11 +16,11 @@ const { OK } = StatusCodes;
 /******************************************************************************
  *       "GET /api/v1/cart"
  ******************************************************************************/
-router.get("/", verifyToken, (req: Request, res: Response) => {
+router.get("/", (req: Request, res: Response) => {
   try {
     getCartItems(req)
       .then((data) => {
-        const resData: IResponse<[]> = {
+        const resData: IResponse<any> = {
           status: OK,
           message: SUCCESS,
           data: {
@@ -42,7 +42,7 @@ router.get("/", verifyToken, (req: Request, res: Response) => {
   } catch (error) {
     console.log(
       "Cart.ts",
-      "getAllOpportunitiesByCategory",
+      "getCartItems",
       error,
       `Error occured GET API - /api/v1/cart`,
       { req, res }
@@ -58,7 +58,7 @@ router.post("/add", verifyToken, (req: Request, res: Response) => {
   try {
     addItemToCart(req)
       .then((data) => {
-        const resData: IResponse<[]> = {
+        const resData: IResponse<any> = {
           status: OK,
           message: SUCCESS,
           data: {
@@ -99,7 +99,7 @@ router.post(
     try {
       updateCartItem(req)
         .then((data) => {
-          const resData: IResponse<[]> = {
+          const resData: IResponse<any> = {
             status: OK,
             message: SUCCESS,
             data: {
@@ -141,7 +141,7 @@ router.post(
     try {
       removeCartItem(req)
         .then((data) => {
-          const resData: IResponse<[]> = {
+          const resData: IResponse<any> = {
             status: OK,
             message: SUCCESS,
             data: {

@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export async function logIn(req: Request): Promise<[]> {
   try {
     return [];

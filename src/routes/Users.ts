@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import StatusCodes from "http-status-codes";
-import { logIn, logOut, signUp } from "../service/UserService";
+import { logIn, logOut, signUp } from "../service/UsersService";
 import { verifyToken } from "../library/utils";
 import { IResponse, ResponseError } from "../shared/interfaces";
 import { BAD_REQUEST_NAME, SUCCESS } from "../shared/constants";

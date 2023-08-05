@@ -1,0 +1,15 @@
+export const Order = {
+  order_id: "order_id",
+  user_id: "user_id",
+  product_id: "product_id",
+  status: "status",
+  item_subtotal: "item_subtotal",
+  shipping_price: "shipping_price",
+  total_price: "total_price",
+  payment_method: "payment_method",
+  shipping_address: "shipping_address",
+  shipped_to: "shipped_to",
+  transaction_id: "transaction_id",
+  order_date: "order_date",
+  delivery_date: "delivery_date",
+};

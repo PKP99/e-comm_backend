@@ -1,0 +1,15 @@
+export const PRODUCT = {
+  id: "id",
+  category: "category",
+  brand: "brand",
+  name: "name",
+  original_price: "original_price",
+  special_price: "special_price",
+  review_rating: "review_rating",
+  review_count: "review_count",
+  features: "features",
+  description: "description",
+  images: "images",
+  videos: "videos",
+  variants: "variants",
+};

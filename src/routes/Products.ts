@@ -3,6 +3,7 @@ import StatusCodes from "http-status-codes";
 import { getProductById, getProducts } from "../service/ProductService";
 import { IResponse, ResponseError } from "../shared/interfaces";
 import { BAD_REQUEST_NAME, CATEGORIES, SUCCESS } from "../shared/constants";
+import { IProduct } from "../db_schema/Products/ProductsInterface";
 
 const router = Router();
 const { OK } = StatusCodes;
@@ -14,7 +15,7 @@ router.get("/categories", (req: Request, res: Response) => {
   try {
     getProducts(req)
       .then((data) => {
-        const resData: IResponse<any> = {
+        const resData: IResponse<string[]> = {
           status: OK,
           message: SUCCESS,
           data: {
@@ -52,7 +53,7 @@ router.get("/:category", (req: Request, res: Response) => {
   try {
     getProducts(req)
       .then((data) => {
-        const resData: IResponse<any> = {
+        const resData: IResponse<IProduct[]> = {
           status: OK,
           message: SUCCESS,
           data: {
@@ -90,7 +91,7 @@ router.get("/:productId", (req: Request, res: Response) => {
   try {
     getProductById(req)
       .then((data) => {
-        const resData: IResponse<any> = {
+        const resData: IResponse<IProduct[]> = {
           status: OK,
           message: SUCCESS,
           data: {
@@ -120,3 +121,5 @@ router.get("/:productId", (req: Request, res: Response) => {
     throw new ResponseError(StatusCodes.BAD_REQUEST, BAD_REQUEST_NAME);
   }
 });
+
+export default router;

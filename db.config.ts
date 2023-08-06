@@ -1,5 +1,5 @@
-"use strict";
-const mysql = require("mysql");
+import mysql from "mysql";
+
 //local mysql db connection
 const dbConn = mysql.createConnection({
   host: "localhost",
@@ -11,4 +11,5 @@ dbConn.connect(function (err) {
   if (err) throw err;
   console.log("Database Connected!");
 });
-module.exports = dbConn;
+
+export default dbConn;

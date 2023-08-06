@@ -1,7 +1,8 @@
+import { ICartItem } from "../db_schema/Cart/CartInterface.js";
 import dbConn from "../../db.config.js";
 import { Request } from "express";
 
-export async function getCartItems(req: Request): Promise<any> {
+export async function getCartItems(req: Request): Promise<ICartItem[]> {
   try {
     return new Promise((resolve, reject) => {
       dbConn.query("Select * from cart", (error, result) => {
@@ -17,7 +18,7 @@ export async function getCartItems(req: Request): Promise<any> {
   }
 }
 
-export async function addItemToCart(req: Request): Promise<any> {
+export async function addItemToCart(req: Request): Promise<ICartItem[]> {
   try {
     return new Promise((resolve, reject) => {
       dbConn.query(
@@ -37,7 +38,7 @@ export async function addItemToCart(req: Request): Promise<any> {
   }
 }
 
-export async function updateCartItem(req: Request): Promise<any> {
+export async function updateCartItem(req: Request): Promise<ICartItem[]> {
   try {
     const dataToUpdate: any = req.query.data;
     return new Promise((resolve, reject) => {
@@ -58,7 +59,7 @@ export async function updateCartItem(req: Request): Promise<any> {
   }
 }
 
-export async function removeCartItem(req: Request): Promise<any> {
+export async function removeCartItem(req: Request): Promise<ICartItem[]> {
   try {
     return new Promise((resolve, reject) => {
       dbConn.query(

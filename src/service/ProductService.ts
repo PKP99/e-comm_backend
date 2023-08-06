@@ -1,7 +1,8 @@
+import { IProduct } from "../db_schema/Products/ProductsInterface.js";
 import dbConn from "../../db.config.js";
 import { Request } from "express";
 
-export async function getProducts(req: Request): Promise<any> {
+export async function getProducts(req: Request): Promise<IProduct[]> {
   try {
     return new Promise((resolve, reject) => {
       dbConn.query(
@@ -44,7 +45,7 @@ export async function getProducts(req: Request): Promise<any> {
   }
 }
 
-export async function getProductById(req: Request): Promise<any> {
+export async function getProductById(req: Request): Promise<IProduct[]> {
   try {
     return new Promise((resolve, reject) => {
       dbConn.query(

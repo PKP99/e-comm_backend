@@ -1,7 +1,8 @@
+import { IOrders } from "../db_schema/Orders/OrdersInterface.js";
 import dbConn from "../../db.config.js";
 import { Request } from "express";
 
-export async function getOrders(req: Request): Promise<any> {
+export async function getOrders(req: Request): Promise<IOrders[]> {
   try {
     return new Promise((resolve, reject) => {
       dbConn.query("Select * from orders", (error, result) => {
@@ -17,7 +18,7 @@ export async function getOrders(req: Request): Promise<any> {
   }
 }
 
-export async function addOrder(req: Request): Promise<any> {
+export async function addOrder(req: Request): Promise<IOrders[]> {
   try {
     return new Promise((resolve, reject) => {
       dbConn.query(
@@ -37,7 +38,7 @@ export async function addOrder(req: Request): Promise<any> {
   }
 }
 
-export async function updateOrder(req: Request): Promise<any> {
+export async function updateOrder(req: Request): Promise<IOrders[]> {
   try {
     const dataToUpdate: any = req.query.data;
     return new Promise((resolve, reject) => {

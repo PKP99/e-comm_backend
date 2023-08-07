@@ -1,11 +1,11 @@
 import { IOrders } from "../db_schema/Orders/OrdersInterface.js";
-import dbConn from "../../db.config.js";
+import dbConn from "../../db.config.ts";
 import { Request } from "express";
 
-export async function getOrders(req: Request): Promise<IOrders[]> {
+export async function getOrders(req: any): Promise<IOrders[]> {
   try {
     return new Promise((resolve, reject) => {
-      dbConn.query("Select * from orders", (error, result) => {
+      dbConn.query("Select * from orders where user_id = ?", req.user, (error, result) => {
         if (error) {
           reject(error);
         } else {
@@ -23,7 +23,7 @@ export async function addOrder(req: Request): Promise<IOrders[]> {
     return new Promise((resolve, reject) => {
       dbConn.query(
         "INSERT INTO orders set ?",
-        req.query.data,
+        req.params.data,
         (error, result) => {
           if (error) {
             reject(error);
@@ -40,15 +40,15 @@ export async function addOrder(req: Request): Promise<IOrders[]> {
 
 export async function updateOrder(req: Request): Promise<IOrders[]> {
   try {
-    const dataToUpdate: any = req.query.data;
+    const dataToUpdate: any = req.params.data;
     return new Promise((resolve, reject) => {
       dbConn.query(
-        "UPDATE orders SET status=?,shipping_address=?,shipping_to=? WHERE id = ?",
+        "UPDATE orders SET status=?,shipping_address=?,shipped_to=? WHERE id = ?",
         [
           dataToUpdate.status,
           dataToUpdate.shipping_address,
-          dataToUpdate.shipping_to,
-          req.params.orderId,
+          dataToUpdate.shipped_to,
+          req.query.orderId,
         ],
         (error, result) => {
           if (error) {

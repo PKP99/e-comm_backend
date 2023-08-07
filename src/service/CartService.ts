@@ -1,5 +1,5 @@
 import { ICartItem } from "../db_schema/Cart/CartInterface.js";
-import dbConn from "../../db.config.js";
+import dbConn from "../../db.config.ts";
 import { Request } from "express";
 
 export async function getCartItems(req: Request): Promise<ICartItem[]> {
@@ -23,7 +23,7 @@ export async function addItemToCart(req: Request): Promise<ICartItem[]> {
     return new Promise((resolve, reject) => {
       dbConn.query(
         "INSERT INTO cart set ?",
-        req.query.data,
+        req.params.data,
         (error, result) => {
           if (error) {
             reject(error);
@@ -40,11 +40,11 @@ export async function addItemToCart(req: Request): Promise<ICartItem[]> {
 
 export async function updateCartItem(req: Request): Promise<ICartItem[]> {
   try {
-    const dataToUpdate: any = req.query.data;
+    const dataToUpdate: any = req.params.data;
     return new Promise((resolve, reject) => {
       dbConn.query(
         "UPDATE cart SET quantity=? WHERE id = ?",
-        [dataToUpdate.quantity, req.params.productId],
+        [dataToUpdate.quantity, req.query.productId],
         (error, result) => {
           if (error) {
             reject(error);
@@ -64,7 +64,7 @@ export async function removeCartItem(req: Request): Promise<ICartItem[]> {
     return new Promise((resolve, reject) => {
       dbConn.query(
         "DELETE FROM cart WHERE id = ?",
-        [req.params.productId],
+        [req.query.productId],
         (error, result) => {
           if (error) {
             reject(error);

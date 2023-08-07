@@ -1,4 +1,4 @@
-import dbConn from "db.config";
+import dbConn from "db.config.ts";
 import { Request } from "express";
 import { JWTConfig } from "jwt.config";
 import {
@@ -18,7 +18,7 @@ export async function logIn(req: Request): Promise<any> {
     const User: any = new Promise((resolve, reject) => {
       dbConn.query(
         "Select * from users where email = ?",
-        req.query.email,
+        req.params.email,
         (error, result) => {
           if (error) {
             reject(error);
@@ -29,7 +29,7 @@ export async function logIn(req: Request): Promise<any> {
       );
     });
     if (User.length > 0) {
-      const isMatched = await compareHash(req.query.password, User[0].password);
+      const isMatched = await compareHash(req.params.password, User[0].password);
       if (isMatched) {
         const token = await createToken({ id: User.id });
         return {

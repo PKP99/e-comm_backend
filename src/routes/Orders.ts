@@ -124,7 +124,7 @@ router.post(
         "Orders.ts",
         "updateOrder",
         error,
-        `Error occured POST API - /api/v1/orders/update/${req.params.orderId}`,
+        `Error occured POST API - /api/v1/orders/update/${req.query.orderId}`,
         { req, res }
       );
       throw new ResponseError(StatusCodes.BAD_REQUEST, BAD_REQUEST_NAME);

@@ -129,7 +129,7 @@ router.post(
         "Cart.ts",
         "updateCartItem",
         error,
-        `Error occured POST API - /api/v1/cart/update/${req.params.productId}`,
+        `Error occured POST API - /api/v1/cart/update/${req.query.productId}`,
         { req, res }
       );
       throw new ResponseError(StatusCodes.BAD_REQUEST, BAD_REQUEST_NAME);
@@ -171,7 +171,7 @@ router.post(
         "Cart.ts",
         "removeCartItem",
         error,
-        `Error occured POST API - /api/v1/cart/remove/${req.params.productId}`,
+        `Error occured POST API - /api/v1/cart/remove/${req.query.productId}`,
         { req, res }
       );
       throw new ResponseError(StatusCodes.BAD_REQUEST, BAD_REQUEST_NAME);

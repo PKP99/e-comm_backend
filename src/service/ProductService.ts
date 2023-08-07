@@ -1,13 +1,22 @@
 import { IProduct } from "../db_schema/Products/ProductsInterface.js";
-import dbConn from "../../db.config.js";
+import dbConn from "../../db.config.ts";
 import { Request } from "express";
+import { CATEGORIES } from "../shared/constants.ts";
+
+export async function getCategories(req: Request): Promise<string[]> {
+  try {
+    return CATEGORIES
+  } catch (error) {
+    console.log("ProductService.ts", "getCategories", error, { req });
+  }
+}
 
 export async function getProducts(req: Request): Promise<IProduct[]> {
   try {
     return new Promise((resolve, reject) => {
       dbConn.query(
         "Select * from product where category = ?",
-        req.params.category,
+        req.query.category,
         (error, result) => {
           if (error) {
             reject(error);
@@ -50,7 +59,7 @@ export async function getProductById(req: Request): Promise<IProduct[]> {
     return new Promise((resolve, reject) => {
       dbConn.query(
         "Select * from product where id = ?",
-        req.params.productId,
+        req.query.productId,
         (error, result) => {
           if (error) {
             reject(error);

@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import StatusCodes from "http-status-codes";
-import { getProductById, getProducts } from "../service/ProductService";
+import { getCategories, getProductById, getProducts } from "../service/ProductService";
 import { IResponse, ResponseError } from "../shared/interfaces";
 import { BAD_REQUEST_NAME, CATEGORIES, SUCCESS } from "../shared/constants";
 import { IProduct } from "../db_schema/Products/ProductsInterface";
@@ -13,7 +13,7 @@ const { OK } = StatusCodes;
  ******************************************************************************/
 router.get("/categories", (req: Request, res: Response) => {
   try {
-    getProducts(req)
+    getCategories(req)
       .then((data) => {
         const resData: IResponse<string[]> = {
           status: OK,
